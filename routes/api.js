@@ -1,4 +1,5 @@
 const express = require('express');
+const { findOne } = require('../models/friend');
 const router = express.Router();
 const Friend = require('../models/friend'); 
 
@@ -16,12 +17,18 @@ router.post('/friends', (req, res, next) => {
 
 //update friend record in the db
 router.put('/friends/:id', (req, res, next) => {
-    res.send({type: 'PUT'});
+    Friend.findByIdAndUpdate({_id: req.params.id}, req.body).then(() => {
+        Friend.findOne({id: req.params.id}).then((friend) => {
+            res.send(friend);
+        });
+    }).catch(next);
 });
 
 //remove frined from the db
 router.delete('/friends/:id', (req, res, next) => {
-    res.send({type: 'DELETE'});
+    Friend.findByIdAndRemove({_id: req.params.id}).then((friend) => {
+        res.send(friend);
+    }).catch(next);
 });
 
 
