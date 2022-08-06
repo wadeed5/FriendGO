@@ -5,7 +5,19 @@ const Friend = require('../models/friend');
 
 //get a list of friends from the db
 router.get('/friends', (req, res, next) => {
-    res.send({type: 'GET'});
+    Friend.aggregate([
+        {
+        $geoNear:
+            {
+                near: { type: 'Point', coordinates:[parseFloat(req.query.lng), parseFloat(req.query.lat)]},
+                distanceField: "dist.calculated", 
+                maxDistance: 100000000,
+                spherical: true
+            }
+        }
+    ]).then((friends) => {
+        res.send(friends);
+    })
 });
 
 //add a new friend to db 

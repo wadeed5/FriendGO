@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
-//create friend schema and model
+// create geolocation schema
+const GeoSchema = new Schema({
+    type: {
+        type: String,
+        default: "Point"
+    },
+    coordinates: {
+        type: [Number],
+        index: "2dsphere" 
+    }
+});
+
+// create friend schema and model
 const FriendSchema = new Schema({
     name: {
         type: String,
@@ -13,8 +25,9 @@ const FriendSchema = new Schema({
     available: {
         type: Boolean,
         default: false
-    }
-    // add in geo location
+    },
+    geometry: GeoSchema
+
 });
 
 
