@@ -9,6 +9,8 @@ const app = express();
 mongoose.connect('mongodb://twig-budgeting:pass1234@localhost:27017/friendgo');
 mongoose.Promise = global.Promise;
 
+app.use(express.static('public'));
+
 // set up json request body parser
 app.use(bodyParser.json());
 

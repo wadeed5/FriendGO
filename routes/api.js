@@ -16,6 +16,7 @@ router.get('/friends', (req, res, next) => {
             }
         }
     ]).then((friends) => {
+        console.log(friends);
         res.send(friends);
     })
 });
