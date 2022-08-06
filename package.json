@@ -19,5 +19,8 @@
   "homepage": "https://github.com/wadeed5/SampleNodeApp#readme",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
